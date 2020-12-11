@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReactivePropertyTest : MonoBehaviour
 {
+
+    [SerializeField] private Text valuText;
+    [SerializeField] private Text buttonText;
+    
     [SerializeField] private IntReactiveProperty _intReactiveProperty 
         = new IntReactiveProperty(100);
 
@@ -41,6 +46,20 @@ public class ReactivePropertyTest : MonoBehaviour
                 Debug.Log("Message False.");
             }
         });
+
+        ///　intReactivePropertyの値が変化したら、UIのTextを更新する
+        _intReactiveProperty.Subscribe(intValu => valuText.text = intValu.ToString());
+
+    }
+
+    /// <summary>
+    /// ボタンを押したら、整数が足される
+    /// </summary>
+    /// <param name="valu"></param>
+    public void AddIntValu(int valu)
+    {
+        _intReactiveProperty.Value += valu;
+        buttonText.text = "AddInt:" + valu.ToString();
 
     }
 
