@@ -24,9 +24,9 @@ public class UniRxOperaterTest : MonoBehaviour
             everyUpdateText.text = valu.ToString();
         });
         
-        /// 5秒ごとに呼び出してくれる
+        /// 1秒ごとに呼び出してくれる
         Observable.Timer(System.TimeSpan.FromSeconds(5), System.TimeSpan.FromSeconds(1))
-            .Subscribe(_ => Debug.Log("５秒ごとに呼びだされています"))
+            .Subscribe(_ => Debug.Log("5秒後以降に1秒ごとに呼びだされています"))
             .AddTo(gameObject);
     }
 
