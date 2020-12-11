@@ -15,7 +15,11 @@ public class ReactivePropertyTest : MonoBehaviour
 
     [SerializeField] private StringReactiveProperty _stringReactiveProperty = new StringReactiveProperty("Test");
     [SerializeField] private BoolReactiveProperty _boolReactiveProperty = new BoolReactiveProperty(true);
-    
+    [SerializeField] ReactiveProperty<GameObject> prefabReactivePropaty = new ReactiveProperty<GameObject>();
+
+    [SerializeField] private GameObject RedPrefab;
+    [SerializeField] private GameObject BluePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +54,12 @@ public class ReactivePropertyTest : MonoBehaviour
         ///　intReactivePropertyの値が変化したら、UIのTextを更新する
         _intReactiveProperty.Subscribe(intValu => valuText.text = intValu.ToString());
 
+
+        prefabReactivePropaty.Subscribe(gameobject =>
+        {
+            Instantiate(gameobject, new Vector3(0, 0, 0), Quaternion.identity);
+            Debug.Log("PrefabName:" + gameobject.name);
+        });
     }
 
     /// <summary>
@@ -62,5 +72,13 @@ public class ReactivePropertyTest : MonoBehaviour
         buttonText.text = "AddInt:" + valu.ToString();
 
     }
+
+    public void AddGameObjectReactivePropaty(GameObject prefab)
+    {
+        prefabReactivePropaty.Value = prefab;
+        Debug.Log(prefab.name);
+    }
+    
+    
 
 }
