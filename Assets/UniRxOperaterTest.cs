@@ -23,6 +23,11 @@ public class UniRxOperaterTest : MonoBehaviour
             valu += 1;
             everyUpdateText.text = valu.ToString();
         });
+        
+        /// 5秒ごとに呼び出してくれる
+        Observable.Timer(System.TimeSpan.FromSeconds(5), System.TimeSpan.FromSeconds(1))
+            .Subscribe(_ => Debug.Log("５秒ごとに呼びだされています"))
+            .AddTo(gameObject);
     }
 
     // Update is called once per frame
