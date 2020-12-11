@@ -31,7 +31,7 @@ public class UniRxOperaterTest : MonoBehaviour
             .Subscribe(_ => Debug.Log("5秒後以降に1秒ごとに呼びだされています"))
             .AddTo(gameObject);
 */
-        whereTestVlu.Where(x => x > 10).Take(10).Subscribe(v => Debug.Log("Valu:" + v));
+        whereTestVlu.Where(x => x > 10).Skip(100).Subscribe(v => Debug.Log("Valu:" + v));
 
 
     }
